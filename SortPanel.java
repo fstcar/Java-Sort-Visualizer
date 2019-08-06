@@ -2,6 +2,7 @@ import javax.swing.JPanel;
 
 public class SortPanel extends JPanel
 {
+    private static final long serialVersionUID = 1L;
     private SortAnimationPanel sortAnimationPanel;
 
     public SortPanel()
