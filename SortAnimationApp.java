@@ -1,5 +1,7 @@
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import java.awt.event.ActionListener;
 
 public class SortAnimationApp extends JFrame
 {
@@ -25,12 +27,19 @@ public class SortAnimationApp extends JFrame
         actionButton = new JButton("Sort");
 
         // Add components
+        addComponent(populateButton, 3, 2, 1, 1);
+        addComponent(sortSpeedComboBox, 4, 2, 1, 1);
+        addComponent(actionButton, 5, 2, 1, 1);
             // Add Two SortPanel objects to the app layout
-            // Add populate button
-            // Add sort speed combo box
-            // Add action button
 
         // Instantiate Handlers
+        HandlePopulateButton handlePopulateButton = new HandlePopulateButton();
+        HandleSortButton handleSortButton = new HandleSortButton();
+
+        // Add listeners to the relevant objects
+        populateButton.addActionListener(handlePopulateButton);
+        actionButton.addActionListener(handleSortButton);
+
     }
 
     // Handle events from buttons
@@ -83,6 +92,7 @@ public class SortAnimationApp extends JFrame
        add(component); // Add component
     }
 
+    // Note to max: I'm not yet positive how we start our main based on the document's instructions, but I think we need it in here
     public static void main()
     {
         SwingUtilities.invokeLater(new Runnable()
