@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - SortAnimationApp",
+            "request": "launch",
+            "mainClass": "SortAnimationApp",
+            "projectName": "A5_425e5c24"
+        }
+    ]
+}
