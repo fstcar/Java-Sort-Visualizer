@@ -43,6 +43,17 @@ public class SortPanel extends JPanel
         }
     }
 
+    private class HandleSortButton implements ActionListener
+    {
+        @Override
+        public void actionPerformed(ActionEvent e)
+        {
+            // Disable sort button
+            // Create a new Thread object from the runnable SortAnimationPanel
+            // Call the Thread object's start() method to start the sort for both panels
+        }
+    }
+
     private class SortAnimationPanel extends JPanel implements Runnable
     {
         private static final long serialVersionUID = 1L;
@@ -58,7 +69,8 @@ public class SortPanel extends JPanel
                 // Draw lines representing values
             }
             
-        }
+        }        
+
         // Override the paintComponent() method
     }
 }
