@@ -1,5 +1,6 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Random;
 
 import javax.swing.JPanel;
@@ -32,17 +33,32 @@ public class SortPanel extends JPanel
             {
                 int randomizedInt = rand.nextInt() % SortAnimationPanel.this.getHeight();
                 randomizedArray.add(randomizedInt);
-
-                // Call repaint() to display the same array values
-                // Disable populate button
-                // Enable sort button
             }
+
+            // Convert to an integer array
+            valuesToSort = randomizedArray.toArray();
+            // Call repaint() to display the same array values
+            // Disable populate button
+            // Enable sort button
         }
     }
 
     private class SortAnimationPanel extends JPanel implements Runnable
     {
         private static final long serialVersionUID = 1L;
-        
+
+        SortAnimationPanel(String title)
+        {
+            super(title);
+
+            // Get dimmensions of panel and clear it
+
+            if (valuesToSort != null)
+            {
+                // Draw lines representing values
+            }
+            
+        }
+        // Override the paintComponent() method
     }
 }
