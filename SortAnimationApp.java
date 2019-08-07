@@ -34,11 +34,11 @@ public class SortAnimationApp extends JFrame
 
         // Instantiate Handlers
         HandlePopulateButton handlePopulateButton = new HandlePopulateButton();
-        HandleSortButton handleSortButton = new HandleSortButton();
+        HandleActionButton handleActionButton = new HandleActionButton();
 
         // Add listeners to the relevant objects
         populateButton.addActionListener(handlePopulateButton);
-        actionButton.addActionListener(handleSortButton);
+        actionButton.addActionListener(handleActionButton);
 
     }
 
@@ -63,18 +63,26 @@ public class SortAnimationApp extends JFrame
 
             // Convert to an integer array
             valuesToSort = randomizedArray.toArray();
+
             // Call repaint() to display the same array values
+
             // Disable populate button
-            // Enable sort button
+            populateButton.setEnabled(false);
+
+            // Enable action button as sort
+            actionButton.setEnabled(true);
+            actionButton.setText("Sort");
         }
     }
 
-    private class HandleSortButton implements ActionListener
+    private class HandleActionButton implements ActionListener
     {
         @Override
         public void actionPerformed(ActionEvent e)
         {
             // Disable sort button
+            actionButton.setEnabled(false);
+            
             // Create a new Thread object from the runnable SortAnimationPanel
             // Call the Thread object's start() method to start the sort for both panels
         }
