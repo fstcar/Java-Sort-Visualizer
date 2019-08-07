@@ -1,3 +1,4 @@
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 
 public class SortAnimationApp extends JFrame
@@ -5,14 +6,31 @@ public class SortAnimationApp extends JFrame
     private static final long serialVersionUID = 1L;
     private SortPanel panel1;
     private SortPanel panel2;
+    private final JButton populateButton;
+    private final JComboBox sortSpeedComboBox;
+    private final JButton actionButton;
 
     public SortAnimationApp(String title) 
     {
         super(title);
-        // Add Two SortPanel objects to the app layout
-        // Populate button
-        // JComboBox for speed of sorting (Slow, med, fast)
-        // Sort/Pause/Resume button
+
+        // Setup Layout and Constraints
+        layout = new GridBagLayout();
+        setLayout(layout);      
+        constraints = new GridBagConstraints();
+
+        // Create GUI Components
+        populateButton = new JButton("Populate");
+        sortSpeedComboBox = new JComboBox<String>(new String[] {"Slow", "Medium", "Fast"});
+        actionButton = new JButton("Sort");
+
+        // Add components
+            // Add Two SortPanel objects to the app layout
+            // Add populate button
+            // Add sort speed combo box
+            // Add action button
+
+        // Instantiate Handlers
     }
 
     // Handle events from buttons
@@ -51,6 +69,18 @@ public class SortAnimationApp extends JFrame
             // Create a new Thread object from the runnable SortAnimationPanel
             // Call the Thread object's start() method to start the sort for both panels
         }
+    }
+
+    // Method to set constraints on 
+    private void addComponent(Component component,
+    int row, int column, int width, int height)
+    {
+       constraints.gridx = column; 
+       constraints.gridy = row;
+       constraints.gridwidth = width;
+       constraints.gridheight = height;
+       layout.setConstraints(component, constraints); // Set constraints
+       add(component); // Add component
     }
 
     public static void main()
