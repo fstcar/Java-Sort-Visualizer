@@ -71,6 +71,12 @@ public class SortPanel extends JPanel
             
         }        
 
+        public void run()
+        {
+            // Call appropriate sort method (Prob use switch for this) to sort in asc. order
+            // Call repaint() everytime there's a swap
+            // After each pass through an outer loop, sleep the thread for 100 miliseconds
+        }
         // Override the paintComponent() method
     }
 }
