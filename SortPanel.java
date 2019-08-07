@@ -14,6 +14,11 @@ public class SortPanel extends JPanel
 
     public SortPanel()
     {
+        // Setup Layout and Constraints
+        layout = new GridBagLayout();
+        setLayout(layout);      
+        constraints = new GridBagConstraints();
+        
         // Create GUI Components
         algorithmComboBox = new JComboBox<String>(new String[] {"Selection", "Bubble", "Heap"});
 
