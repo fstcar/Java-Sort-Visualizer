@@ -116,7 +116,7 @@ public class SortAnimationApp extends JFrame
 
             if (actionButton.getText() == "Sort")
             {
-                if (panel1.getAlgorithm() == "Heapsort")
+                if (panel1.getAlgorithm() == "Heap")
                 {
                     panel1.createThreads(1);
                 }
@@ -136,7 +136,7 @@ public class SortAnimationApp extends JFrame
                     }
                 }
 
-                if (panel2.getAlgorithm() == "Heapsort")
+                if (panel2.getAlgorithm() == "Heap")
                 {
                     panel2.createThreads(1);
                 }
