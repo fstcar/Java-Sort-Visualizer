@@ -55,6 +55,7 @@ public class SortAnimationApp extends JFrame
     
         controlPanel = new JPanel();
         controlPanel.add(populateButton);
+        controlPanel.add(sortSpeedComboBox);
         controlPanel.add(actionButton);
     
     
@@ -132,7 +133,7 @@ public class SortAnimationApp extends JFrame
             @Override
             public void run()
             {
-                new SortAnimationApp("Testing");
+                new SortAnimationApp("Sorting Demo");
             }
         });
     }    
