@@ -112,16 +112,55 @@ public class SortAnimationApp extends JFrame
         @Override
         public void actionPerformed(ActionEvent e)
         {
+            String getSelectedSpeed = sortSpeedComboBox.getSelectedItem().toString();
+
             if (actionButton.getText() == "Sort")
             {
-                panel1.createThreads(1);
-                panel2.createThreads(5);
+                if (panel1.getAlgorithm() == "Heapsort")
+                {
+                    panel1.createThreads(1);
+                }
+                else
+                {
+                    if (getSelectedSpeed == "Slow")
+                    {
+                        panel1.createThreads(1);
+                    }
+                    else if (getSelectedSpeed == "Medium")
+                    {
+                        panel2.createThreads(2);
+                    }
+                    else if (getSelectedSpeed == "Fast")
+                    {
+                        panel2.createThreads(4);
+                    }
+                }
+
+                if (panel2.getAlgorithm() == "Heapsort")
+                {
+                    panel2.createThreads(1);
+                }
+                else
+                {
+                    if (getSelectedSpeed == "Slow")
+                    {
+                        panel2.createThreads(1);
+                    }
+                    else if (getSelectedSpeed == "Medium")
+                    {
+                        panel2.createThreads(2);
+                    }
+                    else if (getSelectedSpeed == "Fast")
+                    {
+                        panel2.createThreads(4);
+                    }
+                }
 
                 panel1.startSort();
                 panel2.startSort();
 
                 // Disable sort button
-                actionButton.setEnabled(false);
+                actionButton.setText("Pause");
             }
         }
     }

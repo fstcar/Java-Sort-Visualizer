@@ -49,12 +49,17 @@ public class SortPanel extends JPanel {
         sortAnimationPanel = new SortAnimationPanel();
 
         // Create GUI Components
-        algorithmComboBox = new JComboBox<String>(new String[] { "Selection", "Bubble", "Heap" });
+        algorithmComboBox = new JComboBox<String>(new String[] { "Selection", "Bubble", "Heap", "Cocktail" });
 
         addComponent(sortAnimationPanel, 0, 0, 1, 1, 1, 1);
         addComponent(algorithmComboBox, 1, 0, 1, 1, 0, 0);
 
         // Manage layout for the controls and animation panel
+    }
+
+    public String getAlgorithm()
+    {
+        return algorithmComboBox.getSelectedItem().toString();
     }
 
     public void generateArray(long seed) {
@@ -211,7 +216,14 @@ public class SortPanel extends JPanel {
 
         public void run() {
             //Testing Basic Sorting
-            heapSort();
+            if(algorithmComboBox.getSelectedItem() == "Heap")
+                heapSort();
+            else if (algorithmComboBox.getSelectedItem() == "Selection")
+                selectionSort();
+            else if (algorithmComboBox.getSelectedItem() == "Bubble")
+                bubbleSort();
+            else if (algorithmComboBox.getSelectedItem() == "Cocktail")
+                cocktailSort();
             // Call appropriate sort method utilizing the combo box to sort in asc. order
             // Call repaint() everytime there's a swap
             // After each pass through an outer loop, sleep the thread for 100 miliseconds
