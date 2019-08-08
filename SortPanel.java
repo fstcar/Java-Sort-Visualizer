@@ -32,10 +32,12 @@ public class SortPanel extends JPanel {
     private GridBagConstraints constraints; // layout's constraints
     private GridBagLayout layout; // layout of this frame
     private ArrayList<Thread> threads;
+    private int sortSpeed;
 
     public SortPanel() 
     {
         threads = new ArrayList<Thread>();
+        sortSpeed = 20;
 
         // Setup Layout and Constraints
         layout = new GridBagLayout();
@@ -59,6 +61,11 @@ public class SortPanel extends JPanel {
     public String getAlgorithm()
     {
         return algorithmComboBox.getSelectedItem().toString();
+    }
+
+    public void setSortSpeed(int sortSpeed)
+    {
+        this.sortSpeed = sortSpeed;
     }
 
     public void generateArray(long seed) {
@@ -121,7 +128,7 @@ void flip(int i)
         start++; 
         i--; 
         repaint();
-        Thread.sleep(2);
+        Thread.sleep(sortSpeed);
     } 
 } catch (InterruptedException e) {
     // Displays that the thread was interupted.
@@ -177,7 +184,7 @@ return mi;
                     flip(curr_size-1); 
                 } 
                 repaint();
-                Thread.sleep(10);
+                Thread.sleep(sortSpeed);
             } 
         }catch (InterruptedException e) {
             // Displays that the thread was interupted.
@@ -209,7 +216,7 @@ return mi;
                 valuesToSort[min_idx] = valuesToSort[i]; 
                 valuesToSort[i] = temp; 
                 repaint();
-                Thread.sleep(20);
+                Thread.sleep(sortSpeed);
             } 
         }
         catch (InterruptedException e) 
@@ -239,7 +246,7 @@ return mi;
                         valuesToSort[i + 1] = tmp;
                         swapped = true;
                         repaint();
-                        Thread.sleep(1);
+                        Thread.sleep(sortSpeed);
                     }
                 }
             }
@@ -271,7 +278,7 @@ return mi;
                     valuesToSort[i + 1] = temp; 
                     swapped = true; 
                 } 
-                Thread.sleep(1);
+                Thread.sleep(sortSpeed);
                 repaint();
             } 
   
@@ -296,7 +303,7 @@ return mi;
                     valuesToSort[i + 1] = temp; 
                     swapped = true; 
                 } 
-                Thread.sleep(1);
+                Thread.sleep(sortSpeed);
                 repaint();
             } 
   
@@ -333,7 +340,7 @@ return mi;
             
                 // call max heapify on the reduced heap 
                 heapify(i, 0); 
-                Thread.sleep(10);
+                Thread.sleep(sortSpeed);
                 repaint();
             } 
         }
