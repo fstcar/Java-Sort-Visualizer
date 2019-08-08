@@ -32,6 +32,7 @@ public class SortPanel extends JPanel {
     private int[] valuesToSort;
     private GridBagConstraints constraints; // layout's constraints
     private GridBagLayout layout; // layout of this frame
+    private int speed;
 
     public SortPanel() {
         // Setup Layout and Constraints
@@ -78,6 +79,11 @@ public class SortPanel extends JPanel {
         t0.start();
     }
 
+    public void setspeed(int speed)
+    {
+        this.speed = speed;
+    }
+
 
     public void BubbleSort()
     {
@@ -95,7 +101,7 @@ public class SortPanel extends JPanel {
                         valuesToSort[i + 1] = tmp;
                         swapped = true;
                         repaint();
-                        Thread.sleep(1);
+                        Thread.sleep(speed);
                     }
                 }
             }

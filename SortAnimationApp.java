@@ -111,6 +111,13 @@ public class SortAnimationApp extends JFrame
         {
             if (actionButton.getText() == "Sort")
             {
+                int speedToSet = 1;
+                if(sortSpeedComboBox.getSelectedIndex() == 0)  speedToSet = 10;
+                else if(sortSpeedComboBox.getSelectedIndex() == 1)  speedToSet = 5;
+                else if(sortSpeedComboBox.getSelectedIndex() == 2)  speedToSet = 1;
+                panel1.setspeed(speedToSet);
+                panel2.setspeed(speedToSet);
+
                 panel1.startsort();
                 panel2.startsort();
 
