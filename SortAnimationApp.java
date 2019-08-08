@@ -114,11 +114,27 @@ public class SortAnimationApp extends JFrame
         {
             String getSelectedSpeed = sortSpeedComboBox.getSelectedItem().toString();
 
+            if (getSelectedSpeed == "Slow")
+            {
+                panel1.setSortSpeed(200);
+                panel2.setSortSpeed(200);
+            }
+            else if (getSelectedSpeed == "Medium")
+            {
+                panel1.setSortSpeed(100);
+                panel2.setSortSpeed(100);
+            }
+            else if (getSelectedSpeed == "Fast")
+            {
+                panel1.setSortSpeed(20);
+                panel2.setSortSpeed(20);
+            }
+
             if (actionButton.getText() == "Sort")
             {
                 if (panel1.getAlgorithm() == "Heap" || panel1.getAlgorithm() == "Selection")
                 {
-                    panel1.createThreads(1);
+                    panel1.createThreads(1);                    
                 }
                 else
                 {
@@ -128,11 +144,11 @@ public class SortAnimationApp extends JFrame
                     }
                     else if (getSelectedSpeed == "Medium")
                     {
-                        panel1.createThreads(2);
+                        panel1.createThreads(10);
                     }
                     else if (getSelectedSpeed == "Fast")
                     {
-                        panel1.createThreads(4);
+                        panel1.createThreads(20);
                     }
                 }
 
@@ -148,11 +164,11 @@ public class SortAnimationApp extends JFrame
                     }
                     else if (getSelectedSpeed == "Medium")
                     {
-                        panel2.createThreads(2);
+                        panel2.createThreads(10);
                     }
                     else if (getSelectedSpeed == "Fast")
                     {
-                        panel2.createThreads(4);
+                        panel2.createThreads(20);
                     }
                 }
 
