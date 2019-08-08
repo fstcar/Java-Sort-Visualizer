@@ -83,6 +83,9 @@ public class SortAnimationApp extends JFrame
         @Override
         public void actionPerformed(ActionEvent e)
         {
+            // Interrupt the threads performing sorts
+
+
             // Provide the same seed based on the system clock
             long seed = System.currentTimeMillis();
 
@@ -110,8 +113,8 @@ public class SortAnimationApp extends JFrame
         {
             if (actionButton.getText() == "Sort")
             {
-                panel1.startsort();
-                panel2.startsort();
+                panel1.startSort();
+                panel2.startSort();
 
                 // Disable sort button
                 actionButton.setEnabled(false);

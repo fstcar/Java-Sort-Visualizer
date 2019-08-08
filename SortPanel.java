@@ -76,7 +76,7 @@ public class SortPanel extends JPanel
     }
 
     //starting the sorting threads
-    public void startsort() 
+    public void startSort() 
     {
         // Create a new Thread object from the runnable SortAnimationPanel
         Thread t0 = new Thread(sortAnimationPanel);
