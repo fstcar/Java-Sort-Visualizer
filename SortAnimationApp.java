@@ -14,7 +14,6 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
 import java.util.ArrayList;
 import java.util.Random;
 import java.awt.event.ActionEvent;
@@ -39,6 +38,7 @@ public class SortAnimationApp extends JFrame
     {
         super(title);
 
+        // Setup Default behavior
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1000, 600); 
         setVisible(true); 
@@ -53,11 +53,13 @@ public class SortAnimationApp extends JFrame
         sortSpeedComboBox = new JComboBox<String>(new String[] {"Slow", "Medium", "Fast"});
         actionButton = new JButton("Sort");
     
+        // Create new JPanel and add populate and action buttons
         controlPanel = new JPanel();
         controlPanel.add(populateButton);
         controlPanel.add(actionButton);
     
     
+        // Add two panels to display the sorting
         panel1 = new SortPanel();
         panel2 = new SortPanel();
         addComponent(panel1, 0, 0, 1, 1, 1, 1);
@@ -81,12 +83,17 @@ public class SortAnimationApp extends JFrame
         @Override
         public void actionPerformed(ActionEvent e)
         {
+            // Provide the same seed based on the system clock
             long seed = System.currentTimeMillis();
+
+            // Generate the array based on a seed
             panel1.generateArray(seed);
             panel2.generateArray(seed);
+
             // Call repaint() to display the same array values
             panel1.repaint();
             panel2.repaint();
+
             // Disable populate button
             //populateButton.setEnabled(false);
 
@@ -101,12 +108,14 @@ public class SortAnimationApp extends JFrame
         @Override
         public void actionPerformed(ActionEvent e)
         {
-            // Disable sort button
-            //actionButton.setEnabled(false);
-            panel1.startsort();
-            panel2.startsort();
-            // Create a new Thread object from the runnable SortAnimationPanel
-            // Call the Thread object's start() method to start the sort for both panels
+            if (actionButton.getText() == "Sort")
+            {
+                panel1.startsort();
+                panel2.startsort();
+
+                // Disable sort button
+                actionButton.setEnabled(false);
+            }
         }
     }
 
@@ -132,7 +141,7 @@ public class SortAnimationApp extends JFrame
             @Override
             public void run()
             {
-                new SortAnimationApp("Testing");
+                new SortAnimationApp("Sorting App");
             }
         });
     }    

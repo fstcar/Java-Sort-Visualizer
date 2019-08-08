@@ -9,7 +9,6 @@ import java.awt.event.ActionListener;
 import java.awt.GridBagConstraints;
 import java.awt.Component;
 import java.awt.Graphics;
-
 import javax.swing.JFrame;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -23,7 +22,8 @@ import java.awt.event.ActionEvent;
 import java.awt.Color;
 import java.lang.Math;
 
-public class SortPanel extends JPanel {
+public class SortPanel extends JPanel 
+{
     private static final long serialVersionUID = 1L;
     private final JComboBox algorithmComboBox;
     private SortAnimationPanel sortAnimationPanel;
@@ -33,7 +33,8 @@ public class SortPanel extends JPanel {
     private GridBagConstraints constraints; // layout's constraints
     private GridBagLayout layout; // layout of this frame
 
-    public SortPanel() {
+    public SortPanel() 
+    {
         // Setup Layout and Constraints
         layout = new GridBagLayout();
         setLayout(layout);
@@ -53,7 +54,8 @@ public class SortPanel extends JPanel {
         // Manage layout for the controls and animation panel
     }
 
-    public void generateArray(long seed) {
+    public void generateArray(long seed) 
+    {
         // Create an array list with size equal to the panel width
         // SortAnimationPanel.this.getHeight()
         valuesToSort = new int[getWidth()];
@@ -64,7 +66,8 @@ public class SortPanel extends JPanel {
         rand.setSeed(seed);
 
         // Populate the array with numbers 0 - height of the panel
-        for (int i = 0; i < valuesToSort.length; i++) {
+        for (int i = 0; i < valuesToSort.length; i++) 
+        {
             int randomizedInt = Math.abs(rand.nextInt()) % getHeight();
             valuesToSort[i] = randomizedInt;
         }
@@ -73,23 +76,31 @@ public class SortPanel extends JPanel {
     }
 
     //starting the sorting threads
-    public void startsort() {
+    public void startsort() 
+    {
+        // Create a new Thread object from the runnable SortAnimationPanel
         Thread t0 = new Thread(sortAnimationPanel);
+
+        // Call the Thread object's start method to start the sort for both panels
         t0.start();
     }
 
 
     public void BubbleSort()
     {
-        try {
+        try 
+        {
             boolean swapped = true;
             int j = 0;
             int tmp;
-            while (swapped) {
+            while (swapped) 
+            {
                 swapped = false;
                 j++;
-                for (int i = 0; i < valuesToSort.length - j; i++) {
-                    if (valuesToSort[i] > valuesToSort[i + 1]) {
+                for (int i = 0; i < valuesToSort.length - j; i++) 
+                {
+                    if (valuesToSort[i] > valuesToSort[i + 1]) 
+                    {
                         tmp = valuesToSort[i];
                         valuesToSort[i] = valuesToSort[i + 1];
                         valuesToSort[i + 1] = tmp;
@@ -99,32 +110,40 @@ public class SortPanel extends JPanel {
                     }
                 }
             }
-        } catch (InterruptedException e) {
+        } 
+        catch (InterruptedException e) 
+        {
             // Displays that the thread was interupted.
             System.out.println(Thread.currentThread().getName() + " interrupted");
         }
     }
 
-    private class SortAnimationPanel extends JPanel implements Runnable {
+    private class SortAnimationPanel extends JPanel implements Runnable 
+    {
         private static final long serialVersionUID = 1L;
 
-        SortAnimationPanel() {
+        SortAnimationPanel() 
+        {
             repaint();
         }
 
-        public void paintComponent(Graphics g) {
+        public void paintComponent(Graphics g) 
+        {
             setBackground(Color.white);
-            if (valuesToSort != null) {
+            if (valuesToSort != null) 
+            {
                 // Draw lines representing values
                 super.paintComponent(g);
                 g.setColor(Color.blue);
-                for (int i = 0; i < valuesToSort.length; i++) {
+                for (int i = 0; i < valuesToSort.length; i++) 
+                {
                     g.fillRect(i, getHeight() - valuesToSort[i], 1, valuesToSort[i]);
                 }
             }
         }
 
-        public void run() {
+        public void run() 
+        {
             //Testing Basic Sorting
             BubbleSort();
             // Call appropriate sort method utilizing the combo box to sort in asc. order
