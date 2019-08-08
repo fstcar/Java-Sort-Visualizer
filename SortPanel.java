@@ -142,54 +142,49 @@ for (mi = 0, i = 0; i < n; ++i)
 return mi; 
 } 
   
-// The main function that  
-// sorts given array using  
-// flip operations 
-public void pancakeSort() 
-{ 
-    try
-        {
-    // Start from the complete 
-    // array and one by one  
-    // reduce current size  
-    // by one 
-    for (int curr_size = valuesToSort.length; curr_size > 1; --curr_size) 
+    // The main function that  
+    // sorts given array using  
+    // flip operations 
+    public void pancakeSort() 
     { 
-        // Find index of the  
-        // maximum element in  
-        // arr[0..curr_size-1] 
-        int mi = findMax(curr_size); 
-  
-        // Move the maximum 
-        // element to end of  
-        // current array if 
-        // it's not already 
-        // at the end 
-        if (mi != curr_size-1) 
-        { 
-            // To move at the end, 
-            // first move maximum  
-            // number to beginning  
-            flip(mi); 
-  
-            // Now move the maximum  
-            // number to end by  
-            // reversing current array 
-            flip(curr_size-1); 
-        } 
-        repaint();
-        Thread.sleep(10);
-    } 
-}catch (InterruptedException e) {
-    // Displays that the thread was interupted.
-    System.out.println(Thread.currentThread().getName() + " interrupted");
-}
-} 
-
-
-
-
-
+        try
+        {
+            // Start from the complete 
+            // array and one by one  
+            // reduce current size  
+            // by one 
+            for (int curr_size = valuesToSort.length; curr_size > 1; --curr_size) 
+            { 
+                // Find index of the  
+                // maximum element in  
+                // arr[0..curr_size-1] 
+                int mi = findMax(curr_size); 
+            
+                // Move the maximum 
+                // element to end of  
+                // current array if 
+                // it's not already 
+                // at the end 
+                if (mi != curr_size-1) 
+                { 
+                    // To move at the end, 
+                    // first move maximum  
+                    // number to beginning  
+                    flip(mi); 
+                
+                    // Now move the maximum  
+                    // number to end by  
+                    // reversing current array 
+                    flip(curr_size-1); 
+                } 
+                repaint();
+                Thread.sleep(10);
+            } 
+        }catch (InterruptedException e) {
+            // Displays that the thread was interupted.
+            System.out.println(Thread.currentThread().getName() + " interrupted");
+        }
+    }
 
     void selectionSort() 
     { 
