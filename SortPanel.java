@@ -103,6 +103,123 @@ public class SortPanel extends JPanel {
         }
     }
 
+
+    /* Reverses arr[0..i] */
+void flip(int i) 
+{ 
+    try{
+    int temp, start = 0; 
+    while (start < i) 
+    { 
+        temp = valuesToSort[start]; 
+        valuesToSort[start] = valuesToSort[i]; 
+        valuesToSort[i] = temp; 
+        start++; 
+        i--; 
+        repaint();
+        Thread.sleep(2);
+    } 
+} catch (InterruptedException e) {
+    // Displays that the thread was interupted.
+    System.out.println(Thread.currentThread().getName() + " interrupted");
+}
+} 
+  
+// Returns index of the  
+// maximum element in  
+// arr[0..n-1]  
+int findMax(int n) 
+{ 
+int mi, i; 
+for (mi = 0, i = 0; i < n; ++i) 
+    if (valuesToSort[i] > valuesToSort[mi]) 
+            mi = i; 
+return mi; 
+} 
+  
+// The main function that  
+// sorts given array using  
+// flip operations 
+public void pancakeSort() 
+{ 
+    try
+        {
+    // Start from the complete 
+    // array and one by one  
+    // reduce current size  
+    // by one 
+    for (int curr_size = valuesToSort.length; curr_size > 1; --curr_size) 
+    { 
+        // Find index of the  
+        // maximum element in  
+        // arr[0..curr_size-1] 
+        int mi = findMax(curr_size); 
+  
+        // Move the maximum 
+        // element to end of  
+        // current array if 
+        // it's not already 
+        // at the end 
+        if (mi != curr_size-1) 
+        { 
+            // To move at the end, 
+            // first move maximum  
+            // number to beginning  
+            flip(mi); 
+  
+            // Now move the maximum  
+            // number to end by  
+            // reversing current array 
+            flip(curr_size-1); 
+        } 
+        repaint();
+        Thread.sleep(10);
+    } 
+}catch (InterruptedException e) {
+    // Displays that the thread was interupted.
+    System.out.println(Thread.currentThread().getName() + " interrupted");
+}
+} 
+
+
+
+
+
+
+    void selectionSort() 
+    { 
+        try
+        {
+        int n = valuesToSort.length; 
+  
+        // One by one move boundary of unsorted subarray 
+        for (int i = 0; i < n-1; i++) 
+        { 
+            // Find the minimum element in unsorted array 
+            int min_idx = i; 
+            for (int j = i+1; j < n; j++) 
+            {
+                if (valuesToSort[j] < valuesToSort[min_idx]) 
+                    min_idx = j; 
+                    repaint();
+                    Thread.sleep(20);
+            }
+            // Swap the found minimum element with the first 
+            // element 
+            int temp = valuesToSort[min_idx]; 
+            valuesToSort[min_idx] = valuesToSort[i]; 
+            valuesToSort[i] = temp; 
+        } 
+         }  catch (InterruptedException e) {
+            // Displays that the thread was interupted.
+            System.out.println(Thread.currentThread().getName() + " interrupted");
+        } 
+
+    } 
+
+
+
+
     public void bubbleSort()
     {
         try {
@@ -128,6 +245,70 @@ public class SortPanel extends JPanel {
             System.out.println(Thread.currentThread().getName() + " interrupted");
         }
     }
+
+    public void cocktailSort() 
+    { 
+        try{
+        boolean swapped = true; 
+        int start = 0; 
+        int end = valuesToSort.length; 
+  
+        while (swapped == true) { 
+            // reset the swapped flag on entering the 
+            // loop, because it might be true from a 
+            // previous iteration. 
+            swapped = false; 
+  
+            // loop from bottom to top same as 
+            // the bubble sort 
+            for (int i = start; i < end - 1; ++i) { 
+                if (valuesToSort[i] > valuesToSort[i + 1]) { 
+                    int temp = valuesToSort[i]; 
+                    valuesToSort[i] = valuesToSort[i + 1]; 
+                    valuesToSort[i + 1] = temp; 
+                    swapped = true; 
+                } 
+                Thread.sleep(1);
+                repaint();
+            } 
+  
+            // if nothing moved, then array is sorted. 
+            if (swapped == false) 
+                break; 
+  
+            // otherwise, reset the swapped flag so that it 
+            // can be used in the next stage 
+            swapped = false; 
+  
+            // move the end point back by one, because 
+            // item at the end is in its rightful spot 
+            end = end - 1; 
+  
+            // from top to bottom, doing the 
+            // same comparison as in the previous stage 
+            for (int i = end - 1; i >= start; i--) { 
+                if (valuesToSort[i] > valuesToSort[i + 1]) { 
+                    int temp = valuesToSort[i]; 
+                    valuesToSort[i] = valuesToSort[i + 1]; 
+                    valuesToSort[i + 1] = temp; 
+                    swapped = true; 
+                } 
+                Thread.sleep(1);
+                repaint();
+            } 
+  
+            // increase the starting point, because 
+            // the last stage would have moved the next 
+            // smallest number to its rightful spot. 
+            start = start + 1; 
+        } 
+    } catch (InterruptedException e) 
+    {
+        // Displays that the thread was interupted.
+        System.out.println(Thread.currentThread().getName() + " interrupted");
+    }
+    } 
+
 
     public void heapSort() 
     { 
@@ -211,7 +392,10 @@ public class SortPanel extends JPanel {
 
         public void run() {
             //Testing Basic Sorting
-            heapSort();
+            //heapSort();
+            //selectionSort();
+            //cocktailSort();
+            pancakeSort();
             // Call appropriate sort method utilizing the combo box to sort in asc. order
             // Call repaint() everytime there's a swap
             // After each pass through an outer loop, sleep the thread for 100 miliseconds

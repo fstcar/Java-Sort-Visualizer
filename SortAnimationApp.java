@@ -115,7 +115,7 @@ public class SortAnimationApp extends JFrame
             if (actionButton.getText() == "Sort")
             {
                 panel1.createThreads(1);
-                panel2.createThreads(5);
+                panel2.createThreads(1);
 
                 panel1.startSort();
                 panel2.startSort();
