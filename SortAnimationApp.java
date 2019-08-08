@@ -128,11 +128,11 @@ public class SortAnimationApp extends JFrame
                     }
                     else if (getSelectedSpeed == "Medium")
                     {
-                        panel2.createThreads(2);
+                        panel1.createThreads(2);
                     }
                     else if (getSelectedSpeed == "Fast")
                     {
-                        panel2.createThreads(4);
+                        panel1.createThreads(4);
                     }
                 }
 
