@@ -52,6 +52,9 @@ public class SortAnimationApp extends JFrame
         populateButton = new JButton("Populate");
         sortSpeedComboBox = new JComboBox<String>(new String[] {"Slow", "Medium", "Fast"});
         actionButton = new JButton("Sort");
+
+        // Set to false until populate is pressed
+        actionButton.setEnabled(false);
     
         // Create new JPanel and add populate and action buttons
         controlPanel = new JPanel();
