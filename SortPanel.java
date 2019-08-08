@@ -189,29 +189,31 @@ return mi;
     { 
         try
         {
-        int n = valuesToSort.length; 
+            int n = valuesToSort.length; 
   
-        // One by one move boundary of unsorted subarray 
-        for (int i = 0; i < n-1; i++) 
-        { 
-            // Find the minimum element in unsorted array 
-            int min_idx = i; 
-            for (int j = i+1; j < n; j++) 
-            {
-                if (valuesToSort[j] < valuesToSort[min_idx])
-                 {
-                    min_idx = j;
-                    repaint();
-                    Thread.sleep(20);
-                 }
-            }
-            // Swap the found minimum element with the first 
-            // element 
-            int temp = valuesToSort[min_idx]; 
-            valuesToSort[min_idx] = valuesToSort[i]; 
-            valuesToSort[i] = temp; 
+            // One by one move boundary of unsorted subarray 
+            for (int i = 0; i < n-1; i++) 
+            { 
+                // Find the minimum element in unsorted array 
+                int min_idx = i; 
+                for (int j = i+1; j < n; j++) 
+                {
+                    if (valuesToSort[j] < valuesToSort[min_idx])
+                    {
+                       min_idx = j;                    
+                    }
+                }
+                // Swap the found minimum element with the first 
+                // element 
+                int temp = valuesToSort[min_idx]; 
+                valuesToSort[min_idx] = valuesToSort[i]; 
+                valuesToSort[i] = temp; 
+                repaint();
+                Thread.sleep(20);
             } 
-         }  catch (InterruptedException e) {
+        }
+        catch (InterruptedException e) 
+        {
             // Displays that the thread was interupted.
             System.out.println(Thread.currentThread().getName() + " interrupted");
         } 
