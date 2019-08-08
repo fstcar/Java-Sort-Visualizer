@@ -113,19 +113,18 @@ public class SortAnimationApp extends JFrame
     // method to set constraints on 
     private void addComponent(Component component,
     int row, int column, int width, int height, double weightx, double weighty)
- {
-    constraints.gridx = column; 
-    constraints.gridy = row;
-    constraints.gridwidth = width;
-    constraints.gridheight = height;
-    constraints.weightx = weightx;
-    constraints.weighty = weighty;
-    constraints.fill = GridBagConstraints.BOTH;
-    layout.setConstraints(component, constraints); // set constraints
-    add(component); // add component
- }
+    {
+       constraints.gridx = column; 
+       constraints.gridy = row;
+       constraints.gridwidth = width;
+       constraints.gridheight = height;
+       constraints.weightx = weightx;
+       constraints.weighty = weighty;
+       constraints.fill = GridBagConstraints.BOTH;
+       layout.setConstraints(component, constraints); // set constraints
+       add(component); // add component
+    }
 
-    // Note to max: I'm not yet positive how we start our main based on the document's instructions, but I think we need it in here
     public static void main(String[] args)
     {
         SwingUtilities.invokeLater(new Runnable()
