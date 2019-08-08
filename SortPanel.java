@@ -109,8 +109,16 @@ public class SortPanel extends JPanel {
     public void stopSort()
     {
         for (Thread thread : threads) 
-        {            
-            thread.interrupt();    
+        {
+            thread.suspend();
+        }
+    }
+
+    public void resumeSort()
+    {
+        for (Thread thread : threads) 
+        {
+            thread.resume();
         }
     }
 

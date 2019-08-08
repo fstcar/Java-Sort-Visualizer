@@ -114,6 +114,7 @@ public class SortAnimationApp extends JFrame
         {
             String getSelectedSpeed = sortSpeedComboBox.getSelectedItem().toString();
 
+            // Always do this so user can change speed
             if (getSelectedSpeed == "Slow")
             {
                 panel1.setSortSpeed(100);
@@ -175,7 +176,23 @@ public class SortAnimationApp extends JFrame
                 panel1.startSort();
                 panel2.startSort();
 
-                // Disable sort button
+                // Enable Pause button
+                actionButton.setText("Pause");
+            }        
+            else if (actionButton.getText() == "Pause")
+            {
+                panel1.stopSort();
+                panel2.stopSort();
+                
+                // Enable Resume button
+                actionButton.setText("Resume");
+            }
+            else if (actionButton.getText() == "Resume")
+            {
+                panel1.resumeSort();
+                panel2.resumeSort();
+
+                // Enable Pause button
                 actionButton.setText("Pause");
             }
         }
