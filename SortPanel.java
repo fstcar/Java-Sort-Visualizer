@@ -27,7 +27,6 @@ public class SortPanel extends JPanel {
     private static final long serialVersionUID = 1L;
     private final JComboBox algorithmComboBox;
     private SortAnimationPanel sortAnimationPanel;
-    private Border blackline = BorderFactory.createLineBorder(Color.black);
     private Border thicc = BorderFactory.createLineBorder(Color.lightGray, 5);
     private int[] valuesToSort;
     private GridBagConstraints constraints; // layout's constraints
