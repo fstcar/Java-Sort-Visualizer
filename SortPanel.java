@@ -128,7 +128,7 @@ void flip(int i)
         start++; 
         i--; 
         repaint();
-        Thread.sleep(sortSpeed);
+        Thread.sleep(sortSpeed/10);
     } 
 } catch (InterruptedException e) {
     // Displays that the thread was interupted.
@@ -184,7 +184,7 @@ return mi;
                     flip(curr_size-1); 
                 } 
                 repaint();
-                Thread.sleep(sortSpeed);
+                Thread.sleep(sortSpeed/2);
             } 
         }catch (InterruptedException e) {
             // Displays that the thread was interupted.
@@ -216,7 +216,7 @@ return mi;
                 valuesToSort[min_idx] = valuesToSort[i]; 
                 valuesToSort[i] = temp; 
                 repaint();
-                Thread.sleep(sortSpeed);
+                Thread.sleep(sortSpeed*10);
             } 
         }
         catch (InterruptedException e) 
@@ -278,7 +278,7 @@ return mi;
                     valuesToSort[i + 1] = temp; 
                     swapped = true; 
                 } 
-                Thread.sleep(sortSpeed);
+                Thread.sleep(sortSpeed/5);
                 repaint();
             } 
   
@@ -303,7 +303,7 @@ return mi;
                     valuesToSort[i + 1] = temp; 
                     swapped = true; 
                 } 
-                Thread.sleep(sortSpeed);
+                Thread.sleep(sortSpeed/5);
                 repaint();
             } 
   
@@ -328,8 +328,11 @@ return mi;
   
             // Build heap (rearrange array) 
             for (int i = n / 2 - 1; i >= 0; i--) 
+            {
+                Thread.sleep(sortSpeed*5);
+                repaint();
                 heapify(n, i); 
-            
+            }
             // One by one extract an element from heap 
             for (int i=n-1; i>=0; i--) 
             { 
@@ -340,7 +343,7 @@ return mi;
             
                 // call max heapify on the reduced heap 
                 heapify(i, 0); 
-                Thread.sleep(sortSpeed);
+                Thread.sleep(sortSpeed*10);
                 repaint();
             } 
         }
@@ -406,6 +409,7 @@ return mi;
                 heapSort();
             else if (algorithmComboBox.getSelectedItem() == "Selection")
                 selectionSort();
+                //pancakeSort();
             else if (algorithmComboBox.getSelectedItem() == "Bubble")
                 bubbleSort();
             else if (algorithmComboBox.getSelectedItem() == "Cocktail")

@@ -116,18 +116,18 @@ public class SortAnimationApp extends JFrame
 
             if (getSelectedSpeed == "Slow")
             {
-                panel1.setSortSpeed(200);
-                panel2.setSortSpeed(200);
-            }
-            else if (getSelectedSpeed == "Medium")
-            {
                 panel1.setSortSpeed(100);
                 panel2.setSortSpeed(100);
             }
+            else if (getSelectedSpeed == "Medium")
+            {
+                panel1.setSortSpeed(50);
+                panel2.setSortSpeed(50);
+            }
             else if (getSelectedSpeed == "Fast")
             {
-                panel1.setSortSpeed(20);
-                panel2.setSortSpeed(20);
+                panel1.setSortSpeed(5);
+                panel2.setSortSpeed(5);
             }
 
             if (actionButton.getText() == "Sort")
