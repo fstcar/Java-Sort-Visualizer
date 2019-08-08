@@ -9,7 +9,6 @@ import java.awt.event.ActionListener;
 import java.awt.GridBagConstraints;
 import java.awt.Component;
 import java.awt.Graphics;
-
 import javax.swing.JFrame;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -23,20 +22,24 @@ import java.awt.event.ActionEvent;
 import java.awt.Color;
 import java.lang.Math;
 
-public class SortPanel extends JPanel {
+public class SortPanel extends JPanel 
+{
     private static final long serialVersionUID = 1L;
-    private final JComboBox algorithmComboBox;
-    private SortAnimationPanel sortAnimationPanel;
-    private Border thicc = BorderFactory.createLineBorder(Color.lightGray, 5);
-    private int[] valuesToSort;
-    private GridBagConstraints constraints; // layout's constraints
-    private GridBagLayout layout; // layout of this frame
-    private ArrayList<Thread> threads;
-    private int sortSpeed;
+    private final JComboBox algorithmComboBox;                                  // Lists algorithm choices
+    private SortAnimationPanel sortAnimationPanel;                              // Represents the animation panel to be painted
+    private Border thicc = BorderFactory.createLineBorder(Color.lightGray, 5);  // Border
+    private int[] valuesToSort;                                                 // Integer array of the randomized values
+    private GridBagConstraints constraints;                                     // layout's constraints
+    private GridBagLayout layout;                                               // layout of this frame
+    private ArrayList<Thread> threads;                                          // Array list of threads used in multithreading
+    private int sortSpeed;                                                      // Represents sleep time
 
     public SortPanel() 
     {
-        threads = new ArrayList<Thread>();
+        // Instantiate our thread list
+        threads = new ArrayList<Thread>(); 
+        
+        // Provide a default sleep time
         sortSpeed = 20;
 
         // Setup Layout and Constraints
@@ -44,18 +47,19 @@ public class SortPanel extends JPanel {
         setLayout(layout);
         constraints = new GridBagConstraints();
 
+        // Set background and border
         setBackground(Color.lightGray);
         setBorder(thicc);
 
+        // Instantiate the Animation panel
         sortAnimationPanel = new SortAnimationPanel();
 
         // Create GUI Components
         algorithmComboBox = new JComboBox<String>(new String[] { "Selection", "Bubble", "Heap", "Cocktail" });
 
+        // Add our components
         addComponent(sortAnimationPanel, 0, 0, 1, 1, 1, 1);
         addComponent(algorithmComboBox, 1, 0, 1, 1, 0, 0);
-
-        // Manage layout for the controls and animation panel
     }
 
     public String getAlgorithm()
@@ -68,7 +72,8 @@ public class SortPanel extends JPanel {
         this.sortSpeed = sortSpeed;
     }
 
-    public void generateArray(long seed) {
+    public void generateArray(long seed) 
+    {
         // Create an array list with size equal to the panel width
         // SortAnimationPanel.this.getHeight()
         valuesToSort = new int[getWidth()];
@@ -79,7 +84,8 @@ public class SortPanel extends JPanel {
         rand.setSeed(seed);
 
         // Populate the array with numbers 0 - height of the panel
-        for (int i = 0; i < valuesToSort.length; i++) {
+        for (int i = 0; i < valuesToSort.length; i++) 
+        {
             int randomizedInt = Math.abs(rand.nextInt()) % getHeight();
             valuesToSort[i] = randomizedInt;
         }
@@ -90,7 +96,7 @@ public class SortPanel extends JPanel {
     //creating the sorting threads
     public void createThreads(int numberOfThreads) 
     {
-        // Create a new Thread object from the runnable SortAnimationPanel
+        // Creates threads based on requested amount
         for(int i = 0; i < numberOfThreads; i++)
         {
             threads.add(new Thread(sortAnimationPanel));
@@ -99,7 +105,7 @@ public class SortPanel extends JPanel {
 
     public void startSort()
     {
-        // Call the Thread object's start method to start the sort for both panels
+        // Call each Thread object's start method to start the sort for both panels
         for (Thread thread : threads) 
         {            
             thread.start();    
@@ -108,6 +114,7 @@ public class SortPanel extends JPanel {
 
     public void stopSort()
     {
+        // Suspend each thread until resume is called
         for (Thread thread : threads) 
         {
             thread.suspend();
@@ -116,6 +123,7 @@ public class SortPanel extends JPanel {
 
     public void resumeSort()
     {
+        // Resume each thread
         for (Thread thread : threads) 
         {
             thread.resume();
@@ -124,48 +132,52 @@ public class SortPanel extends JPanel {
 
     public void terminateSort()
     {
+        // Interrupt each thread
         for (Thread thread : threads) 
         {
             thread.interrupt();
         }
-        
-        // Cleanup
+
+        // Cleanup the threads object
         threads.clear();
     }
 
 
     /* Reverses arr[0..i] */
-void flip(int i) 
-{ 
-    try{
-    int temp, start = 0; 
-    while (start < i) 
+    void flip(int i) 
     { 
-        temp = valuesToSort[start]; 
-        valuesToSort[start] = valuesToSort[i]; 
-        valuesToSort[i] = temp; 
-        start++; 
-        i--; 
-        repaint();
-        Thread.sleep(sortSpeed/10);
+        try
+        {
+            int temp, start = 0; 
+            while (start < i) 
+            { 
+                temp = valuesToSort[start]; 
+                valuesToSort[start] = valuesToSort[i]; 
+                valuesToSort[i] = temp; 
+                start++; 
+                i--; 
+                repaint();
+                Thread.sleep(sortSpeed/10);
+            } 
+        }
+        catch (InterruptedException e) 
+        {
+            // Displays that the thread was interupted.
+            System.out.println(Thread.currentThread().getName() + " interrupted");
+        }
     } 
-} catch (InterruptedException e) {
-    // Displays that the thread was interupted.
-    System.out.println(Thread.currentThread().getName() + " interrupted");
-}
-} 
   
-// Returns index of the  
-// maximum element in  
-// arr[0..n-1]  
-int findMax(int n) 
-{ 
-int mi, i; 
-for (mi = 0, i = 0; i < n; ++i) 
-    if (valuesToSort[i] > valuesToSort[mi]) 
-            mi = i; 
-return mi; 
-} 
+    // Returns index of the  
+    // maximum element in  
+    // arr[0..n-1]  
+    int findMax(int n) 
+    { 
+        int mi, i; 
+        for (mi = 0, i = 0; i < n; ++i) 
+            if (valuesToSort[i] > valuesToSort[mi]) 
+                    mi = i; 
+        return mi; 
+    } 
   
     // The main function that  
     // sorts given array using  
@@ -205,7 +217,9 @@ return mi;
                 repaint();
                 Thread.sleep(sortSpeed/2);
             } 
-        }catch (InterruptedException e) {
+        }
+        catch (InterruptedException e)
+        {
             // Displays that the thread was interupted.
             System.out.println(Thread.currentThread().getName() + " interrupted");
         }
@@ -244,22 +258,23 @@ return mi;
             System.out.println(Thread.currentThread().getName() + " interrupted");
         } 
 
-    } 
-
-
-
+    }
 
     public void bubbleSort()
     {
-        try {
+        try 
+        {
             boolean swapped = true;
             int j = 0;
             int tmp;
-            while (swapped) {
+            while (swapped) 
+            {
                 swapped = false;
                 j++;
-                for (int i = 0; i < valuesToSort.length - j; i++) {
-                    if (valuesToSort[i] > valuesToSort[i + 1]) {
+                for (int i = 0; i < valuesToSort.length - j; i++) 
+                {
+                    if (valuesToSort[i] > valuesToSort[i + 1]) 
+                    {
                         tmp = valuesToSort[i];
                         valuesToSort[i] = valuesToSort[i + 1];
                         valuesToSort[i + 1] = tmp;
@@ -269,7 +284,9 @@ return mi;
                     }
                 }
             }
-        } catch (InterruptedException e) {
+        }
+        catch (InterruptedException e)
+        {
             // Displays that the thread was interupted.
             System.out.println(Thread.currentThread().getName() + " interrupted");
         }
@@ -277,67 +294,73 @@ return mi;
 
     public void cocktailSort() 
     { 
-        try{
-        boolean swapped = true; 
-        int start = 0; 
-        int end = valuesToSort.length; 
-  
-        while (swapped == true) { 
-            // reset the swapped flag on entering the 
-            // loop, because it might be true from a 
-            // previous iteration. 
-            swapped = false; 
-  
-            // loop from bottom to top same as 
-            // the bubble sort 
-            for (int i = start; i < end - 1; ++i) { 
-                if (valuesToSort[i] > valuesToSort[i + 1]) { 
-                    int temp = valuesToSort[i]; 
-                    valuesToSort[i] = valuesToSort[i + 1]; 
-                    valuesToSort[i + 1] = temp; 
-                    swapped = true; 
+        try
+        {
+            boolean swapped = true; 
+            int start = 0; 
+            int end = valuesToSort.length; 
+            
+            while (swapped == true) 
+            { 
+                // reset the swapped flag on entering the 
+                // loop, because it might be true from a 
+                // previous iteration. 
+                swapped = false; 
+            
+                // loop from bottom to top same as 
+                // the bubble sort 
+                for (int i = start; i < end - 1; ++i) 
+                { 
+                    if (valuesToSort[i] > valuesToSort[i + 1]) 
+                    { 
+                        int temp = valuesToSort[i]; 
+                        valuesToSort[i] = valuesToSort[i + 1]; 
+                        valuesToSort[i + 1] = temp; 
+                        swapped = true; 
+                    } 
+                    Thread.sleep(sortSpeed/5);
+                    repaint();
                 } 
-                Thread.sleep(sortSpeed/5);
-                repaint();
-            } 
-  
-            // if nothing moved, then array is sorted. 
-            if (swapped == false) 
-                break; 
-  
-            // otherwise, reset the swapped flag so that it 
-            // can be used in the next stage 
-            swapped = false; 
-  
-            // move the end point back by one, because 
-            // item at the end is in its rightful spot 
-            end = end - 1; 
-  
-            // from top to bottom, doing the 
-            // same comparison as in the previous stage 
-            for (int i = end - 1; i >= start; i--) { 
-                if (valuesToSort[i] > valuesToSort[i + 1]) { 
-                    int temp = valuesToSort[i]; 
-                    valuesToSort[i] = valuesToSort[i + 1]; 
-                    valuesToSort[i + 1] = temp; 
-                    swapped = true; 
+            
+                // if nothing moved, then array is sorted. 
+                if (swapped == false) 
+                    break; 
+            
+                // otherwise, reset the swapped flag so that it 
+                // can be used in the next stage 
+                swapped = false; 
+            
+                // move the end point back by one, because 
+                // item at the end is in its rightful spot 
+                end = end - 1; 
+            
+                // from top to bottom, doing the 
+                // same comparison as in the previous stage 
+                for (int i = end - 1; i >= start; i--) 
+                { 
+                    if (valuesToSort[i] > valuesToSort[i + 1]) 
+                    { 
+                        int temp = valuesToSort[i]; 
+                        valuesToSort[i] = valuesToSort[i + 1]; 
+                        valuesToSort[i + 1] = temp; 
+                        swapped = true; 
+                    } 
+                    Thread.sleep(sortSpeed/5);
+                    repaint();
                 } 
-                Thread.sleep(sortSpeed/5);
-                repaint();
+            
+                // increase the starting point, because 
+                // the last stage would have moved the next 
+                // smallest number to its rightful spot. 
+                start = start + 1; 
             } 
-  
-            // increase the starting point, because 
-            // the last stage would have moved the next 
-            // smallest number to its rightful spot. 
-            start = start + 1; 
-        } 
-    } catch (InterruptedException e) 
-    {
-        // Displays that the thread was interupted.
-        System.out.println(Thread.currentThread().getName() + " interrupted");
+        }
+        catch (InterruptedException e)
+        {
+            // Displays that the thread was interupted.
+            System.out.println(Thread.currentThread().getName() + " interrupted");
+        }
     }
-    } 
-
 
     public void heapSort() 
     { 
@@ -394,8 +417,7 @@ return mi;
         { 
             int swap = valuesToSort[i]; 
             valuesToSort[i] = valuesToSort[largest]; 
-            valuesToSort[largest] = swap; 
-            //repaint();
+            valuesToSort[largest] = swap;
   
             // Recursively heapify the affected sub-tree 
             heapify(n, largest); 
@@ -406,38 +428,38 @@ return mi;
     {
         private static final long serialVersionUID = 1L;
 
-        SortAnimationPanel() {
+        SortAnimationPanel() 
+        {
             repaint();
         }
 
-        public void paintComponent(Graphics g) {
+        public void paintComponent(Graphics g) 
+        {
             setBackground(Color.white);
-            if (valuesToSort != null) {
+            if (valuesToSort != null) 
+            {
                 // Draw lines representing values
                 super.paintComponent(g);
                 g.setColor(Color.blue);
-                for (int i = 0; i < valuesToSort.length; i++) {
+                for (int i = 0; i < valuesToSort.length; i++) 
+                {
                     g.fillRect(i, getHeight() - valuesToSort[i], 1, valuesToSort[i]);
                 }
             }
         }
 
-        public void run() {
-            //Testing Basic Sorting
+        public void run() 
+        {
+            // Call appropriate sort method utilizing the combo box to sort in asc. order
             if(algorithmComboBox.getSelectedItem() == "Heap")
                 heapSort();
             else if (algorithmComboBox.getSelectedItem() == "Selection")
                 selectionSort();
-                //pancakeSort();
             else if (algorithmComboBox.getSelectedItem() == "Bubble")
                 bubbleSort();
             else if (algorithmComboBox.getSelectedItem() == "Cocktail")
                 cocktailSort();
-            // Call appropriate sort method utilizing the combo box to sort in asc. order
-            // Call repaint() everytime there's a swap
-            // After each pass through an outer loop, sleep the thread for 100 miliseconds
         }
-        // Override the paintComponent() method
     }
 
     // method to set constraints on

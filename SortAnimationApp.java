@@ -23,19 +23,19 @@ import java.lang.Math;
 
 public class SortAnimationApp extends JFrame
 {
-
     private static final long serialVersionUID = 1L;
-    private SortPanel panel1;
-    private SortPanel panel2;
-    private JPanel controlPanel;
-    private final JButton populateButton;
-    private final JComboBox sortSpeedComboBox;
-    private final JButton actionButton;
-    private final GridBagLayout layout; // layout of this frame
-    private final GridBagConstraints constraints; // layout's constraints
+    private SortPanel panel1;                       // A panel that contains sort algo. combo box and painted values
+    private SortPanel panel2;                       // A panel that contains sort algo. combo box and painted values
+    private JPanel controlPanel;                    // Holds Populate Btn. Sort Speed Combo box and Action Button
+    private final JButton populateButton;           // Populates the panels
+    private final JComboBox sortSpeedComboBox;      // Combo box that has speed options
+    private final JButton actionButton;             // Sort / Pause / Resume buttons
+    private final GridBagLayout layout;             // layout of this frame
+    private final GridBagConstraints constraints;   // layout's constraints
 
     public SortAnimationApp(String title) 
     {
+        // Set title
         super(title);
 
         // Setup Default behavior
@@ -78,7 +78,6 @@ public class SortAnimationApp extends JFrame
         // Add listeners to the relevant objects
         populateButton.addActionListener(handlePopulateButton);
         actionButton.addActionListener(handleActionButton);
-
     }
 
     // Handle events from buttons
@@ -117,6 +116,7 @@ public class SortAnimationApp extends JFrame
         @Override
         public void actionPerformed(ActionEvent e)
         {
+            // Assign getSelectedSpeed so we aren't calling multiple times
             String getSelectedSpeed = sortSpeedComboBox.getSelectedItem().toString();
 
             // Always do this so user can change speed
@@ -136,14 +136,17 @@ public class SortAnimationApp extends JFrame
                 panel2.setSortSpeed(5);
             }
 
+            // Logic depending on what button is pressed
             if (actionButton.getText() == "Sort")
             {
+                // Heap and Selection don't benefit from our multithreading so we give them one thread
                 if (panel1.getAlgorithm() == "Heap" || panel1.getAlgorithm() == "Selection")
                 {
                     panel1.createThreads(1);                    
                 }
                 else
                 {
+                    // Create threads based on selected speed
                     if (getSelectedSpeed == "Slow")
                     {
                         panel1.createThreads(1);
@@ -158,12 +161,14 @@ public class SortAnimationApp extends JFrame
                     }
                 }
 
+                // Heap and Selection don't benefit from our multithreading so we give them one thread
                 if (panel2.getAlgorithm() == "Heap" || panel2.getAlgorithm() == "Selection")
                 {
                     panel2.createThreads(1);
                 }
                 else
                 {
+                    // Create threads based on selected speed
                     if (getSelectedSpeed == "Slow")
                     {
                         panel2.createThreads(1);
@@ -178,6 +183,7 @@ public class SortAnimationApp extends JFrame
                     }
                 }
 
+                // Start sorting process
                 panel1.startSort();
                 panel2.startSort();
 
@@ -186,6 +192,7 @@ public class SortAnimationApp extends JFrame
             }        
             else if (actionButton.getText() == "Pause")
             {
+                // Stop our sorting
                 panel1.stopSort();
                 panel2.stopSort();
                 
@@ -194,6 +201,7 @@ public class SortAnimationApp extends JFrame
             }
             else if (actionButton.getText() == "Resume")
             {
+                // Resume our sorting
                 panel1.resumeSort();
                 panel2.resumeSort();
 
