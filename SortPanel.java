@@ -32,9 +32,12 @@ public class SortPanel extends JPanel
     private int[] valuesToSort;
     private GridBagConstraints constraints; // layout's constraints
     private GridBagLayout layout; // layout of this frame
+    private ArrayList<Thread> threads;
 
     public SortPanel() 
     {
+        threads = new ArrayList<Thread>();
+
         // Setup Layout and Constraints
         layout = new GridBagLayout();
         setLayout(layout);
@@ -75,18 +78,34 @@ public class SortPanel extends JPanel
         rand.setSeed(1);
     }
 
-    //starting the sorting threads
-    public void startSort() 
+    //creating the sorting threads
+    public void createThreads(int numberOfThreads) 
     {
         // Create a new Thread object from the runnable SortAnimationPanel
-        Thread t0 = new Thread(sortAnimationPanel);
-
-        // Call the Thread object's start method to start the sort for both panels
-        t0.start();
+        for(int i = 0; i < numberOfThreads; i++)
+        {
+            threads.add(new Thread(sortAnimationPanel));
+        }         
     }
 
+    public void startSort()
+    {
+        // Call the Thread object's start method to start the sort for both panels
+        for (Thread thread : threads) 
+        {            
+            thread.start();    
+        }
+    }
 
-    public void BubbleSort()
+    public void stopSort()
+    {
+        for (Thread thread : threads) 
+        {            
+            thread.interrupt();    
+        }
+    }
+
+    public void bubbleSort()
     {
         try 
         {
@@ -118,6 +137,66 @@ public class SortPanel extends JPanel
         }
     }
 
+    public void heapSort() 
+    { 
+        try
+        {
+            int n = valuesToSort.length; 
+  
+            // Build heap (rearrange array) 
+            for (int i = n / 2 - 1; i >= 0; i--) 
+                heapify(n, i); 
+            
+            // One by one extract an element from heap 
+            for (int i=n-1; i>=0; i--) 
+            { 
+                // Move current root to end 
+                int temp = valuesToSort[0]; 
+                valuesToSort[0] = valuesToSort[i]; 
+                valuesToSort[i] = temp; 
+            
+                // call max heapify on the reduced heap 
+                heapify(i, 0); 
+                repaint();
+            } 
+        }
+        catch (InterruptedException e) 
+        {
+            // Displays that the thread was interupted.
+            System.out.println(Thread.currentThread().getName() + " interrupted");
+        }
+    } 
+  
+    // To heapify a subtree rooted with node i which is 
+    // an index in arr[]. n is size of heap 
+    void heapify(int n, int i) 
+    { 
+        int largest = i; // Initialize largest as root 
+        int l = 2*i + 1; // left = 2*i + 1 
+        int r = 2*i + 2; // right = 2*i + 2 
+  
+        // If left child is larger than root 
+        if (l < n && valuesToSort[l] > valuesToSort[largest]) 
+            largest = l; 
+  
+        // If right child is larger than largest so far 
+        if (r < n && valuesToSort[r] > valuesToSort[largest]) 
+            largest = r; 
+  
+        // If largest is not root 
+        if (largest != i) 
+        { 
+            int swap = valuesToSort[i]; 
+            valuesToSort[i] = valuesToSort[largest]; 
+            valuesToSort[largest] = swap; 
+            repaint();
+            Thread.sleep(1);
+  
+            // Recursively heapify the affected sub-tree 
+            heapify(n, largest); 
+        } 
+    } 
+
     private class SortAnimationPanel extends JPanel implements Runnable 
     {
         private static final long serialVersionUID = 1L;
@@ -145,7 +224,7 @@ public class SortPanel extends JPanel
         public void run() 
         {
             //Testing Basic Sorting
-            BubbleSort();
+            heapSort();
             // Call appropriate sort method utilizing the combo box to sort in asc. order
             // Call repaint() everytime there's a swap
             // After each pass through an outer loop, sleep the thread for 100 miliseconds
