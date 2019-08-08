@@ -185,7 +185,7 @@ return mi;
         }
     }
 
-    void selectionSort() 
+    public void selectionSort() 
     { 
         try
         {
@@ -198,17 +198,19 @@ return mi;
             int min_idx = i; 
             for (int j = i+1; j < n; j++) 
             {
-                if (valuesToSort[j] < valuesToSort[min_idx]) 
-                    min_idx = j; 
+                if (valuesToSort[j] < valuesToSort[min_idx])
+                 {
+                    min_idx = j;
                     repaint();
                     Thread.sleep(20);
+                 }
             }
             // Swap the found minimum element with the first 
             // element 
             int temp = valuesToSort[min_idx]; 
             valuesToSort[min_idx] = valuesToSort[i]; 
             valuesToSort[i] = temp; 
-        } 
+            } 
          }  catch (InterruptedException e) {
             // Displays that the thread was interupted.
             System.out.println(Thread.currentThread().getName() + " interrupted");
