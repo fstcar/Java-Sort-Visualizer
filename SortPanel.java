@@ -119,7 +119,7 @@ public class SortPanel extends JPanel {
                         valuesToSort[i + 1] = tmp;
                         swapped = true;
                         repaint();
-                        Thread.sleep(speed);
+                        Thread.sleep(1);
                     }
                 }
             }
@@ -149,6 +149,7 @@ public class SortPanel extends JPanel {
             
                 // call max heapify on the reduced heap 
                 heapify(i, 0); 
+                Thread.sleep(10);
                 repaint();
             } 
         }
@@ -181,8 +182,7 @@ public class SortPanel extends JPanel {
             int swap = valuesToSort[i]; 
             valuesToSort[i] = valuesToSort[largest]; 
             valuesToSort[largest] = swap; 
-            repaint();
-            Thread.sleep(1);
+            //repaint();
   
             // Recursively heapify the affected sub-tree 
             heapify(n, largest); 

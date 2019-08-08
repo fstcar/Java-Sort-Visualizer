@@ -114,23 +114,11 @@ public class SortAnimationApp extends JFrame
         {
             if (actionButton.getText() == "Sort")
             {
-<<<<<<< HEAD
                 panel1.createThreads(1);
-                panel2.createThreads(1);
+                panel2.createThreads(5);
 
                 panel1.startSort();
                 panel2.startSort();
-=======
-                int speedToSet = 1;
-                if(sortSpeedComboBox.getSelectedIndex() == 0)  speedToSet = 10;
-                else if(sortSpeedComboBox.getSelectedIndex() == 1)  speedToSet = 5;
-                else if(sortSpeedComboBox.getSelectedIndex() == 2)  speedToSet = 1;
-                panel1.setspeed(speedToSet);
-                panel2.setspeed(speedToSet);
-
-                panel1.startsort();
-                panel2.startsort();
->>>>>>> ceaae1fc8865d5e8fbfd6dcc8a9f57bc18cace71
 
                 // Disable sort button
                 actionButton.setEnabled(false);
