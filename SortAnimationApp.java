@@ -85,6 +85,8 @@ public class SortAnimationApp extends JFrame
         public void actionPerformed(ActionEvent e)
         {
             // Interrupt the threads performing sorts
+            panel1.terminateSort();
+            panel2.terminateSort();
 
 
             // Provide the same seed based on the system clock

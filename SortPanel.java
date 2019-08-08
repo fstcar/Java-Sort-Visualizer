@@ -122,6 +122,17 @@ public class SortPanel extends JPanel {
         }
     }
 
+    public void terminateSort()
+    {
+        for (Thread thread : threads) 
+        {
+            thread.interrupt();
+        }
+        
+        // Cleanup
+        threads.clear();
+    }
+
 
     /* Reverses arr[0..i] */
 void flip(int i) 
