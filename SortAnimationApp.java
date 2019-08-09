@@ -105,7 +105,7 @@ public class SortAnimationApp extends JFrame
             // Pause current threads
             panel1.stopSort();
             panel2.stopSort();
-            
+
             // Interrupt the threads performing sorts
             panel1.terminateSort();
             panel2.terminateSort();
@@ -121,9 +121,6 @@ public class SortAnimationApp extends JFrame
             // Call repaint() to display the same array values
             panel1.repaint();
             panel2.repaint();
-
-            // Disable populate button
-            //populateButton.setEnabled(false);
 
             // Enable action button as sort
             actionButton.setEnabled(true);
