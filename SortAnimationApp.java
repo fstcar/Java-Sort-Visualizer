@@ -1,3 +1,18 @@
+/************************************************************
+ *                                                          *
+ *  CSCI 470-2/502-2       Assignment 5        Summer 2019  *
+ *                   (or In-Class Exercise n)               *
+ *                                                          *
+ *  Class Name:  SortAnimationApp                           *
+ *                                                          *
+ *  Programmer:  Robert Oury                                *
+ *               Brett Carney                               *
+ *                                                          *
+ *  Purpose:  App class that contains the main method, the  *
+ *            control panel objects, Sort Panels, and button*
+ *            event handling                                *
+ *                                                          *
+ ************************************************************/
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -33,6 +48,13 @@ public class SortAnimationApp extends JFrame
     private final GridBagLayout layout;             // layout of this frame
     private final GridBagConstraints constraints;   // layout's constraints
 
+    /************************************************************
+    *                                                           *
+    *  Method Name:  SortAnimationApp                           *
+    *                                                           *
+    *  Purpose:  Constructor for our default layout             *
+    *                                                           *
+    ************************************************************/
     public SortAnimationApp(String title) 
     {
         // Set title
@@ -80,7 +102,15 @@ public class SortAnimationApp extends JFrame
         actionButton.addActionListener(handleActionButton);
     }
 
-    // Handle events from buttons
+    /************************************************************
+    *                                                           *
+    *  Handler Name:  HandlePopulateButton                      *
+    *                                                           *
+    *  Purpose:  Terminates the current sort, creates a new     *
+    *            integer array for all panels, and displays the *
+    *            new array to the panels                        *
+    *                                                           *
+    ************************************************************/
     private class HandlePopulateButton implements ActionListener
     {
         @Override
@@ -111,6 +141,15 @@ public class SortAnimationApp extends JFrame
         }
     }
 
+    /************************************************************
+    *                                                           *
+    *  Handler Name:  HandleActionButton                        *
+    *                                                           *
+    *  Purpose:  Sets the selected speed, creates threads based *
+    *            on selected speed/algorithm, and starts the    *
+    *            sorting processes                              *
+    *                                                           *
+    ************************************************************/
     private class HandleActionButton implements ActionListener
     {
         @Override
@@ -211,7 +250,13 @@ public class SortAnimationApp extends JFrame
         }
     }
 
-    // method to set constraints on 
+    /************************************************************
+    *                                                           *
+    *  Method Name:  addComponent                               *
+    *                                                           *
+    *  Purpose:  Adds a component to the specified position     *
+    *                                                           *
+    ************************************************************/
     private void addComponent(Component component,
     int row, int column, int width, int height, double weightx, double weighty)
     {

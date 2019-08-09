@@ -1,3 +1,18 @@
+/************************************************************
+ *                                                          *
+ *  CSCI 470-2/502-2       Assignment 5        Summer 2019  *
+ *                   (or In-Class Exercise n)               *
+ *                                                          *
+ *  Class Name:  SortPanel                                  *
+ *                                                          *
+ *  Programmer:  Robert Oury                                *
+ *               Brett Carney                               *
+ *                                                          *
+ *  Purpose:  Handles algorithm selection, animation panel  *
+ *            postion, random array, sort speed, and        *
+ *            algorithm logic.                              *
+ *                                                          *
+ ************************************************************/
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -34,6 +49,13 @@ public class SortPanel extends JPanel
     private ArrayList<Thread> threads;                                          // Array list of threads used in multithreading
     private int sortSpeed;                                                      // Represents sleep time
 
+    /************************************************************
+    *                                                           *
+    *  Method Name:  SortPanel                                  *
+    *                                                           *
+    *  Purpose:  Constructor for our default layout             *
+    *                                                           *
+    ************************************************************/
     public SortPanel() 
     {
         // Instantiate our thread list
@@ -62,16 +84,37 @@ public class SortPanel extends JPanel
         addComponent(algorithmComboBox, 1, 0, 1, 1, 0, 0);
     }
 
+    /************************************************************
+    *                                                           *
+    *  Method Name:  getAlgorithm                               *
+    *                                                           *
+    *  Purpose:  Gets the selected algorithm as a String        *
+    *                                                           *
+    ************************************************************/
     public String getAlgorithm()
     {
         return algorithmComboBox.getSelectedItem().toString();
     }
 
+    /************************************************************
+    *                                                           *
+    *  Method Name:  setSortSpeed                               *
+    *                                                           *
+    *  Purpose:  Sets the private member for sort speed         *
+    *                                                           *
+    ************************************************************/
     public void setSortSpeed(int sortSpeed)
     {
         this.sortSpeed = sortSpeed;
     }
 
+    /************************************************************
+    *                                                           *
+    *  Method Name:  generateArray                              *
+    *                                                           *
+    *  Purpose:  Creates an integer array based on the seed     *
+    *                                                           *
+    ************************************************************/
     public void generateArray(long seed) 
     {
         // Create an array list with size equal to the panel width
@@ -93,7 +136,14 @@ public class SortPanel extends JPanel
         rand.setSeed(1);
     }
 
-    //creating the sorting threads
+    /************************************************************
+    *                                                           *
+    *  Method Name:  createThreads                              *
+    *                                                           *
+    *  Purpose:  Adds numberOfThreads new threads to the threads*
+    *            array list                                     *
+    *                                                           *
+    ************************************************************/
     public void createThreads(int numberOfThreads) 
     {
         // Creates threads based on requested amount
@@ -103,6 +153,13 @@ public class SortPanel extends JPanel
         }         
     }
 
+    /************************************************************
+    *                                                           *
+    *  Method Name:  startSort                                  *
+    *                                                           *
+    *  Purpose:  Starts all threads in the threads ArrayList    *
+    *                                                           *
+    ************************************************************/
     public void startSort()
     {
         // Call each Thread object's start method to start the sort for both panels
@@ -112,6 +169,13 @@ public class SortPanel extends JPanel
         }
     }
 
+    /************************************************************
+    *                                                           *
+    *  Method Name:  stopSort                                   *
+    *                                                           *
+    *  Purpose:  Suspends all threads in the threads ArrayList  *
+    *                                                           *
+    ************************************************************/
     public void stopSort()
     {
         // Suspend each thread until resume is called
@@ -121,6 +185,13 @@ public class SortPanel extends JPanel
         }
     }
 
+    /************************************************************
+    *                                                           *
+    *  Method Name:  resumeSort                                 *
+    *                                                           *
+    *  Purpose:  Resumes all threads in the threads ArrayList   *
+    *                                                           *
+    ************************************************************/
     public void resumeSort()
     {
         // Resume each thread
@@ -130,6 +201,13 @@ public class SortPanel extends JPanel
         }
     }
 
+    /************************************************************
+    *                                                           *
+    *  Method Name:  terminateSort                              *
+    *                                                           *
+    *  Purpose:  Interrupts all threads in the threads ArrayList*
+    *                                                           *
+    ************************************************************/
     public void terminateSort()
     {
         // Interrupt each thread
@@ -141,48 +219,16 @@ public class SortPanel extends JPanel
         // Cleanup the threads object
         threads.clear();
     }
-
-
-    /* Reverses arr[0..i] */
-    void flip(int i) 
-    { 
-        try
-        {
-            int temp, start = 0; 
-            while (start < i) 
-            { 
-                temp = valuesToSort[start]; 
-                valuesToSort[start] = valuesToSort[i]; 
-                valuesToSort[i] = temp; 
-                start++; 
-                i--; 
-                repaint();
-                Thread.sleep(sortSpeed/10);
-            } 
-        }
-        catch (InterruptedException e) 
-        {
-            // Displays that the thread was interupted.
-            System.out.println(Thread.currentThread().getName() + " interrupted");
-        }
-    } 
   
-    // Returns index of the  
-    // maximum element in  
-    // arr[0..n-1]  
-    int findMax(int n) 
-    { 
-        int mi, i; 
-        for (mi = 0, i = 0; i < n; ++i) 
-            if (valuesToSort[i] > valuesToSort[mi]) 
-                    mi = i; 
-        return mi; 
-    } 
-  
-    // The main function that  
-    // sorts given array using  
-    // flip operations 
-    public void pancakeSort() 
+    /************************************************************
+    *                                                           *
+    *  Method Name:  pancakeSort                                *
+    *                                                           *
+    *  Purpose:  Performs the pancake sort algorithm            *
+    *            on valuesToSort                                *
+    *                                                           *
+    ************************************************************/
+    private void pancakeSort() 
     { 
         try
         {
@@ -225,7 +271,61 @@ public class SortPanel extends JPanel
         }
     }
 
-    public void selectionSort() 
+    /************************************************************
+    *                                                           *
+    *  Method Name:  flip                                       *
+    *                                                           *
+    *  Purpose:  Helper method to pancakeSort                   *
+    *                                                           *
+    ************************************************************/
+    private void flip(int i) 
+    { 
+        try
+        {
+            int temp, start = 0; 
+            while (start < i) 
+            { 
+                temp = valuesToSort[start]; 
+                valuesToSort[start] = valuesToSort[i]; 
+                valuesToSort[i] = temp; 
+                start++; 
+                i--; 
+                repaint();
+                Thread.sleep(sortSpeed/10);
+            } 
+        }
+        catch (InterruptedException e) 
+        {
+            // Displays that the thread was interupted.
+            System.out.println(Thread.currentThread().getName() + " interrupted");
+        }
+    } 
+  
+    /************************************************************
+    *                                                           *
+    *  Method Name:  findMax                                    *
+    *                                                           *
+    *  Purpose:  Helper method to pancakeSort                   *
+    *                                                           *
+    ************************************************************/
+    private int findMax(int n) 
+    { 
+        int mi, i; 
+        for (mi = 0, i = 0; i < n; ++i) 
+            if (valuesToSort[i] > valuesToSort[mi]) 
+                    mi = i; 
+        return mi; 
+    } 
+
+    /************************************************************
+    *                                                           *
+    *  Method Name:  selectionSort                              *
+    *                                                           *
+    *  Purpose:  Performs the selection sort algorithm          *
+    *            on valuesToSort                                *
+    *                                                           *
+    ************************************************************/
+    private void selectionSort() 
     { 
         try
         {
@@ -260,7 +360,15 @@ public class SortPanel extends JPanel
 
     }
 
-    public void bubbleSort()
+    /************************************************************
+    *                                                           *
+    *  Method Name:  bubbleSort                                 *
+    *                                                           *
+    *  Purpose:  Performs the bubble sort algorithm             *
+    *            on valuesToSort                                *
+    *                                                           *
+    ************************************************************/
+    private void bubbleSort()
     {
         try 
         {
@@ -292,7 +400,14 @@ public class SortPanel extends JPanel
         }
     }
 
-    public void cocktailSort() 
+    /************************************************************
+    *                                                           *
+    *  Method Name:  cocktailSort                               *
+    *                                                           *
+    *  Purpose:  Performs the cocktail algorithm on valuesToSort*
+    *                                                           *
+    ************************************************************/
+    private void cocktailSort() 
     { 
         try
         {
@@ -362,7 +477,14 @@ public class SortPanel extends JPanel
         }
     }
 
-    public void heapSort() 
+    /************************************************************
+    *                                                           *
+    *  Method Name:  heapSort                                   *
+    *                                                           *
+    *  Purpose:  Performs the heapsort algorithm on valuesToSort*
+    *                                                           *
+    ************************************************************/
+    private void heapSort() 
     { 
         try
         {
@@ -396,9 +518,14 @@ public class SortPanel extends JPanel
         }
     } 
   
-    // To heapify a subtree rooted with node i which is 
-    // an index in arr[]. n is size of heap 
-    void heapify(int n, int i) 
+    /************************************************************
+    *                                                           *
+    *  Method Name:  heapify                                    *
+    *                                                           *
+    *  Purpose:  Helper method for heapSort                     *
+    *                                                           *
+    ************************************************************/
+    private void heapify(int n, int i) 
     { 
         int largest = i; // Initialize largest as root 
         int l = 2*i + 1; // left = 2*i + 1 
@@ -424,15 +551,44 @@ public class SortPanel extends JPanel
         } 
     } 
 
+    /************************************************************
+    *                                                          *
+    *  CSCI 470-2/502-2       Assignment 5        Summer 2019  *
+    *                   (or In-Class Exercise n)               *
+    *                                                          *
+    *  Class Name:  SortAnimationPanel                         *
+    *                                                          *
+    *  Programmer:  Robert Oury                                *
+    *               Brett Carney                               *
+    *                                                          *
+    *  Purpose:  Inner runnable class to paint all algorithm   *
+    *            updates to the array to the animation panel   *
+    *                                                          *
+    ************************************************************/
     private class SortAnimationPanel extends JPanel implements Runnable 
     {
         private static final long serialVersionUID = 1L;
 
+        /************************************************************
+        *                                                           *
+        *  Method Name:  SortAnimationPanel                         *
+        *                                                           *
+        *  Purpose:  Call repaint upon instantiation                *
+        *                                                           *
+        ************************************************************/
         SortAnimationPanel() 
         {
             repaint();
         }
 
+        /************************************************************
+        *                                                           *
+        *  Method Name:  paintComponent                             *
+        *                                                           *
+        *  Purpose:  Set background to white and paint a blue rect. *
+        *            based on the value                             *
+        *                                                           *
+        ************************************************************/
         public void paintComponent(Graphics g) 
         {
             setBackground(Color.white);
@@ -448,6 +604,13 @@ public class SortPanel extends JPanel
             }
         }
 
+        /************************************************************
+        *                                                           *
+        *  Method Name:  run                                        *
+        *                                                           *
+        *  Purpose:  Runs the selected sort algorithm               *
+        *                                                           *
+        ************************************************************/
         public void run() 
         {
             // Call appropriate sort method utilizing the combo box to sort in asc. order
@@ -462,7 +625,13 @@ public class SortPanel extends JPanel
         }
     }
 
-    // method to set constraints on
+    /************************************************************
+    *                                                           *
+    *  Method Name:  addComponent                               *
+    *                                                           *
+    *  Purpose:  Adds a component to the specified position     *
+    *                                                           *
+    ************************************************************/
     private void addComponent(Component component, int row, int column, int width, int height, int weightx,
             int weighty) {
         constraints.gridx = column;
