@@ -13,27 +13,16 @@
  *            algorithm logic.                              *
  *                                                          *
  ************************************************************/
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Random;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import java.awt.GridBagLayout;
-import java.awt.event.ActionListener;
 import java.awt.GridBagConstraints;
 import java.awt.Component;
 import java.awt.Graphics;
-import javax.swing.JFrame;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
 import javax.swing.border.Border;
 import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JLabel;
-import java.util.Random;
-import java.awt.event.ActionEvent;
 import java.awt.Color;
 import java.lang.Math;
 

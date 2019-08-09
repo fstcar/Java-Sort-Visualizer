@@ -18,23 +18,11 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import java.awt.event.ActionListener;
 import java.awt.GridBagLayout;
-import java.awt.event.ActionListener;
 import java.awt.GridBagConstraints;
 import java.awt.Component;
-import javax.swing.JFrame;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import java.util.ArrayList;
-import java.util.Random;
 import java.awt.event.ActionEvent;
-import java.awt.Color;
-import java.lang.Math;
-
 
 public class SortAnimationApp extends JFrame
 {
@@ -84,7 +72,6 @@ public class SortAnimationApp extends JFrame
         controlPanel.add(sortSpeedComboBox);
         controlPanel.add(actionButton);
     
-    
         // Add two panels to display the sorting
         panel1 = new SortPanel();
         panel2 = new SortPanel();
@@ -92,7 +79,6 @@ public class SortAnimationApp extends JFrame
         addComponent(panel2, 0, 1, 1, 1, 1, 1);
         addComponent(controlPanel,1 ,0 ,2 ,1 , 0, 0);
     
-
         // Instantiate Handlers
         HandlePopulateButton handlePopulateButton = new HandlePopulateButton();
         HandleActionButton handleActionButton = new HandleActionButton();
