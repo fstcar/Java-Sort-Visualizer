@@ -179,7 +179,7 @@ public class SortAnimationApp extends JFrame
             if (actionButton.getText() == "Sort")
             {
                 // Heap and Selection don't benefit from our multithreading so we give them one thread
-                if (panel1.getAlgorithm() == "Heap" || panel1.getAlgorithm() == "Selection")
+                if (panel1.getAlgorithm() == "Heap" || panel1.getAlgorithm() == "Selection" || panel1.getAlgorithm() == "Pancake")
                 {
                     panel1.createThreads(1);                    
                 }
@@ -201,7 +201,7 @@ public class SortAnimationApp extends JFrame
                 }
 
                 // Heap and Selection don't benefit from our multithreading so we give them one thread
-                if (panel2.getAlgorithm() == "Heap" || panel2.getAlgorithm() == "Selection")
+                if (panel2.getAlgorithm() == "Heap" || panel2.getAlgorithm() == "Selection" || panel1.getAlgorithm() == "Pancake")
                 {
                     panel2.createThreads(1);
                 }

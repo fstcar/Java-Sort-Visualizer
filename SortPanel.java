@@ -77,7 +77,7 @@ public class SortPanel extends JPanel
         sortAnimationPanel = new SortAnimationPanel();
 
         // Create GUI Components
-        algorithmComboBox = new JComboBox<String>(new String[] { "Selection", "Bubble", "Heap", "Cocktail" });
+        algorithmComboBox = new JComboBox<String>(new String[] { "Selection", "Bubble", "Heap", "Cocktail", "Pancake" });
 
         // Add our components
         addComponent(sortAnimationPanel, 0, 0, 1, 1, 1, 1);
@@ -622,6 +622,8 @@ public class SortPanel extends JPanel
                 bubbleSort();
             else if (algorithmComboBox.getSelectedItem() == "Cocktail")
                 cocktailSort();
+            else if (algorithmComboBox.getSelectedItem() == "Pancake")
+                pancakeSort();
         }
     }
 
