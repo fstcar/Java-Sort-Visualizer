@@ -291,7 +291,7 @@ public class SortPanel extends JPanel
                 start++; 
                 i--; 
                 repaint();
-                Thread.sleep(sortSpeed/10);
+                Thread.sleep(sortSpeed/3);
             } 
         }
         catch (InterruptedException e) 

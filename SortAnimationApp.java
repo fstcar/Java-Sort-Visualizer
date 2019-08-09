@@ -116,6 +116,10 @@ public class SortAnimationApp extends JFrame
         @Override
         public void actionPerformed(ActionEvent e)
         {
+            // Pause current threads
+            panel1.stopSort();
+            panel2.stopSort();
+            
             // Interrupt the threads performing sorts
             panel1.terminateSort();
             panel2.terminateSort();
