@@ -108,7 +108,7 @@ public class SortPanel extends JPanel
     {
         // Create an array list with size equal to the panel width
         // SortAnimationPanel.this.getHeight()
-        valuesToSort = new int[getWidth()];
+        valuesToSort = new int[sortAnimationPanel.getWidth()];
 
         // Instantiate randomizer
         Random rand = new Random();
@@ -118,7 +118,7 @@ public class SortPanel extends JPanel
         // Populate the array with numbers 0 - height of the panel
         for (int i = 0; i < valuesToSort.length; i++) 
         {
-            int randomizedInt = Math.abs(rand.nextInt()) % getHeight();
+            int randomizedInt = Math.abs(rand.nextInt()) % sortAnimationPanel.getHeight();
             valuesToSort[i] = randomizedInt;
         }
 
@@ -588,7 +588,7 @@ public class SortPanel extends JPanel
                 g.setColor(Color.blue);
                 for (int i = 0; i < valuesToSort.length; i++) 
                 {
-                    g.fillRect(i, getHeight() - valuesToSort[i], 1, valuesToSort[i]);
+                    g.fillRect(i, sortAnimationPanel.getHeight() - valuesToSort[i], 1, valuesToSort[i]);
                 }
             }
         }
