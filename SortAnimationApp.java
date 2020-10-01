@@ -183,7 +183,7 @@ public class SortAnimationApp extends JFrame
                     }
                     else if (getSelectedSpeed == "Fast")
                     {
-                        panel1.createThreads(20);
+                        panel1.createThreads(200);
                     }
                 }
 
@@ -205,7 +205,7 @@ public class SortAnimationApp extends JFrame
                     }
                     else if (getSelectedSpeed == "Fast")
                     {
-                        panel2.createThreads(20);
+                        panel2.createThreads(200);
                     }
                 }
 

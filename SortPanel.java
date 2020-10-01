@@ -31,7 +31,7 @@ public class SortPanel extends JPanel
     private static final long serialVersionUID = 1L;
     private final JComboBox algorithmComboBox;                                  // Lists algorithm choices
     private SortAnimationPanel sortAnimationPanel;                              // Represents the animation panel to be painted
-    private Border thicc = BorderFactory.createLineBorder(Color.lightGray, 5);  // Border
+    private Border thick = BorderFactory.createLineBorder(Color.lightGray, 5);  // Border
     private int[] valuesToSort;                                                 // Integer array of the randomized values
     private GridBagConstraints constraints;                                     // layout's constraints
     private GridBagLayout layout;                                               // layout of this frame
@@ -60,7 +60,7 @@ public class SortPanel extends JPanel
 
         // Set background and border
         setBackground(Color.lightGray);
-        setBorder(thicc);
+        setBorder(thick);
 
         // Instantiate the Animation panel
         sortAnimationPanel = new SortAnimationPanel();
